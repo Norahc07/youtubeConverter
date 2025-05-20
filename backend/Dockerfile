@@ -1,13 +1,10 @@
 # Use a base image with Node.js
 FROM node:20-slim
 
-# Install Python, pip, and ffmpeg
+# Install Python, pip, ffmpeg, and yt-dlp
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends python3 python3-pip ffmpeg && \
+    apt-get install -y --no-install-recommends python3 python3-pip ffmpeg yt-dlp && \
     rm -rf /var/lib/apt/lists/*
-
-# Install yt-dlp using pip
-RUN pip3 install yt-dlp
 
 # Set the working directory inside the container
 WORKDIR /app
