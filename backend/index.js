@@ -18,6 +18,24 @@ if (!fs.existsSync(downloadsDir)) {
   fs.mkdirSync(downloadsDir);
 }
 
+// Common yt-dlp options
+const ytDlpOptions = [
+  '--no-warnings',
+  '--no-check-certificates',
+  '--prefer-insecure',
+  '--add-header', 'User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+  '--add-header', 'Accept-Language:en-US,en;q=0.9',
+  '--add-header', 'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  '--add-header', 'Accept-Encoding:gzip, deflate, br',
+  '--add-header', 'Connection:keep-alive',
+  '--add-header', 'Upgrade-Insecure-Requests:1',
+  '--add-header', 'Sec-Fetch-Dest:document',
+  '--add-header', 'Sec-Fetch-Mode:navigate',
+  '--add-header', 'Sec-Fetch-Site:none',
+  '--add-header', 'Sec-Fetch-User:?1',
+  '--add-header', 'Cache-Control:max-age=0'
+].join(' ');
+
 // Map resolution to yt-dlp format string
 const formatMap = {
   '360p': 'bestvideo[height=360][vcodec=avc1][ext=mp4]+bestaudio[acodec=m4a][ext=m4a]/bestvideo[height=360][vcodec=vp09][ext=webm]+bestaudio[acodec=opus][ext=webm]/bestvideo[height=360]+bestaudio/best[height=360]/best',
@@ -38,7 +56,7 @@ app.post('/api/getVideoInfo', async (req, res) => {
     console.log('Fetching video info for:', url);
     
     const result = await new Promise((resolve, reject) => {
-      exec(`yt-dlp --dump-json "${url}"`, (error, stdout, stderr) => {
+      exec(`yt-dlp ${ytDlpOptions} --dump-json "${url}"`, (error, stdout, stderr) => {
         if (error) {
           console.error('yt-dlp error:', error);
           console.error('yt-dlp stderr:', stderr);
@@ -81,7 +99,7 @@ app.post('/api/download', async (req, res) => {
     }
 
     const result = await new Promise((resolve, reject) => {
-      exec(`yt-dlp -f "${format}" "${url}" -o "downloads/%(title)s.%(ext)s"`, (error, stdout, stderr) => {
+      exec(`yt-dlp ${ytDlpOptions} -f "${format}" "${url}" -o "downloads/%(title)s.%(ext)s"`, (error, stdout, stderr) => {
         if (error) {
           console.error('yt-dlp download error:', error);
           console.error('yt-dlp download stderr:', stderr);
