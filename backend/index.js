@@ -1,8 +1,12 @@
-const express = require('express');
-const cors = require('cors');
-const { exec, spawn } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+import express from 'express';
+import cors from 'cors';
+import { exec, spawn } from 'child_process';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(cors());
@@ -13,6 +17,16 @@ const downloadsDir = path.join(__dirname, 'downloads');
 if (!fs.existsSync(downloadsDir)) {
   fs.mkdirSync(downloadsDir);
 }
+
+// Map resolution to yt-dlp format string
+const formatMap = {
+  '360p': 'bestvideo[height=360][vcodec=avc1][ext=mp4]+bestaudio[acodec=m4a][ext=m4a]/bestvideo[height=360][vcodec=vp09][ext=webm]+bestaudio[acodec=opus][ext=webm]/bestvideo[height=360]+bestaudio/best[height=360]/best',
+  '480p': 'bestvideo[height=480][vcodec=avc1][ext=mp4]+bestaudio[acodec=m4a][ext=m4a]/bestvideo[height=480][vcodec=vp09][ext=webm]+bestaudio[acodec=opus][ext=webm]/bestvideo[height=480]+bestaudio/best[height=480]/best',
+  '720p': 'bestvideo[height=720][vcodec=avc1][ext=mp4]+bestaudio[acodec=m4a][ext=m4a]/bestvideo[height=720][vcodec=vp09][ext=webm]+bestaudio[acodec=opus][ext=webm]/bestvideo[height=720]+bestaudio/best[height=720]/best',
+  '1080p': 'bestvideo[height=1080][vcodec=avc1][ext=mp4]+bestaudio[acodec=m4a][ext=m4a]/bestvideo[height=1080][vcodec=vp09][ext=webm]+bestaudio[acodec=opus][ext=webm]/bestvideo[height=1080]+bestaudio/best[height=1080]/best',
+  '1440p': 'bestvideo[height=1440][vcodec=avc1][ext=mp4]+bestaudio[acodec=m4a][ext=m4a]/bestvideo[height=1440][vcodec=vp09][ext=webm]+bestaudio[acodec=opus][ext=webm]/bestvideo[height=1440]+bestaudio/best[height=1440]/best',
+  '2160p': 'bestvideo[height=2160][vcodec=avc1][ext=mp4]+bestaudio[acodec=m4a][ext=m4a]/bestvideo[height=2160][vcodec=vp09][ext=webm]+bestaudio[acodec=opus][ext=webm]/bestvideo[height=2160]+bestaudio/best[height=2160]/best'
+};
 
 app.post('/api/getVideoInfo', async (req, res) => {
   try {
