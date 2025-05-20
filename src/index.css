@@ -1,0 +1,193 @@
+/* === General Layout === */
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 0.5rem;
+  background: #FFC0CB;
+}
+
+.card-width {
+  width: 350px;
+}
+
+/* === Header Styles === */
+.header-title {
+  font-size: 96px; /* h1 */
+  font-family: 'Jersey 10', cursive;
+  text-align: center;
+  font-weight: normal;
+}
+
+.header-subtitle {
+  font-size: 48px; /* h2 */
+  font-family: 'Jersey 10', cursive;
+  text-align: center;
+  font-weight: normal;
+}
+
+/* === Form Section === */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem; /* gap-3 */
+  margin-bottom: 1.5rem; /* mb-6 */
+}
+
+.youtube-label {
+  font-size: 1rem;
+  font-family: 'Jersey 10', cursive;
+}
+
+/* Input field styling (already added earlier, just reference) */
+.youtube-input {
+  border-radius: 9999px;
+  border: 2px solid black;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-family: "Jersey 10", sans-serif;
+  background-color: white;
+  margin-bottom: 0.25rem;
+  height: 3rem;
+  width: 350px;
+  outline: none;
+}
+
+.youtube-input:focus {
+  box-shadow: 0 0 0 2px #f472b6;
+}
+
+.youtube-input::placeholder {
+  font-size: 1rem;
+  font-family: "Jersey 10", sans-serif;
+  color: #888;
+}
+
+/* Error Message */
+.input-error {
+  color: #ef4444; /* red-500 */
+  font-size: 0.875rem; /* text-sm */
+  font-family: 'Jersey 10', cursive;
+  margin-bottom: 1.25rem;
+}
+
+/* Convert Button */
+.convert-button {
+  border-radius: 9999px;
+  border: 2px solid black;
+  background: white;
+  padding: 0.75rem 2.5rem;
+  font-family: 'Jersey 10', cursive;
+  font-size: 1.125rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.convert-button:hover {
+  background-color: #fce7f3; /* pink-100 */
+}
+
+.convert-button:disabled {
+  opacity: 0.5;
+}
+
+/* Video Display Card */
+.video-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.video-thumbnail {
+  background: white;
+  border: 2px solid black;
+  border-radius: 1rem;
+  height: 14rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  width: 350px;
+}
+
+.video-thumbnail img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.video-title {
+  font-family: 'Jersey 10', cursive;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Resolution Selection */
+.select-resolution-label {
+  font-weight: 600;
+  font-size: 1.5rem;
+  font-family: 'Jersey 10', cursive;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-weight: normal;
+}
+
+.resolution-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.resolution-button {
+  border-radius: 9999px;
+  border: 2px solid black;
+  background: white;
+  padding: 0.75rem 1.75rem;
+  font-family: 'Jersey 10', cursive;
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.resolution-button:hover {
+  background-color: #fce7f3;
+}
+
+.resolution-button.selected {
+  background-color: #fbcfe8; /* pink-200 */
+}
+
+/* Download Button */
+.download-button {
+  border-radius: 9999px;
+  border: 2px solid black;
+  background: white;
+  padding: 0.75rem 3rem;
+  font-family: 'Jersey 10', cursive;
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.download-button:hover {
+  background-color: #fce7f3;
+}
+
+/* Footer */
+.footer {
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-family: 'Jersey 10', cursive;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
