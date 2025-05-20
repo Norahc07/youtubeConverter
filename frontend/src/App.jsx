@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowDownTrayIcon } from '@heroicons/react/24/solid';
 import './index.css';
 
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+
 function isValidYouTubeUrl(url) {
   return /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/gi.test(url);
 }
@@ -43,7 +45,7 @@ export default function App() {
     setError('');
     setSubmitted(false);
     try {
-      const res = await fetch('http://localhost:4000/api/getVideoInfo', {
+      const res = await fetch(`${apiUrl}/api/getVideoInfo`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: youtubeUrl }),
@@ -74,7 +76,7 @@ export default function App() {
     }, 200);
 
     try {
-      const response = await fetch('http://localhost:4000/api/download', {
+      const response = await fetch(`${apiUrl}/api/download`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: youtubeUrl, resolution: selectedResolution }),
